@@ -10,6 +10,6 @@ CREATE TABLE matches (
   id SERIAL4 primary key,
   away_team_score INT4,
   home_team_score INT4,
-  away_team_id INT4 references teams( id ),
-  home_team_id INT4 references teams( id )
+  away_team_id INT4 references teams( id ) ON DELETE CASCADE,
+  home_team_id INT4 references teams( id ) ON DELETE CASCADE
 );

@@ -16,24 +16,37 @@ class Match
 
   def save()
     sql =
-    "INSERT INTO (
-    id,
-    away_team_score,
-    home_team_score,
-    away_team_id,
-    home_team_id)
+    "INSERT INTO matches (
+      away_team_score,
+      home_team_score,
+      away_team_id,
+      home_team_id )
     VALUES (
-    '#{@away_team_score}',
-    '#{@home_team_score}',
-    '#{@away_team_id}',
-    '#{@home_team_id}')
+      #{@away_team_score},
+      #{@home_team_score},
+      #{@away_team_id},
+      #{@home_team_id})
     RETURNING *;"
+    return Match.map_item( sql )
+  end
+
+  def update(  )
+    sql =
+    "UPDATE matches
+    SET
+      away_team_score = #{@away_team_score},
+      home_team_score = #{@home_team_score},
+      away_team_id = #{@away_team_id},
+      home_team_id = #{@home_team_id}
+    WHERE id = #{@id}
+    RETURNING * ;"
+    return Match.map_item( sql )
   end
 
   def self.all()
     sql =
     "SELECT * FROM matches;"
-    SqlRunner.run( sql )
+    Match.map_items( sql )
   end
 
 #Helper functions: repository for dry functions
