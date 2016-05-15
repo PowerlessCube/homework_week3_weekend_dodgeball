@@ -1,18 +1,19 @@
 require( 'pg' )
 require_relative( '../db/sql_runner' )
+require_relative( './match' )
 require( 'pry-byebug' )
 
 class Team
 
-  # attr_reader( :id )
-  attr_accessor( :id, :name )
+  attr_reader( :id )
+  attr_accessor( :name )
 
   def initialize( options )
     @id = options[ 'id' ].to_i
     @name = options[ 'name' ]
   end
 
-  def save()
+  def save(  )
     sql =
     "INSERT INTO teams (name)
     VALUES ( '#{ @name }' )
@@ -20,7 +21,7 @@ class Team
     return Team.map_item( sql )
   end
 
-  def update( )
+  def update(  )
     sql =
     "UPDATE teams
     SET name = '#{@name}'
@@ -29,7 +30,7 @@ class Team
     return Team.map_item( sql )
   end
 
-  def self.all()
+  def self.all(  )
     sql =
     "SELECT * FROM teams;"
     return Team.map_items( sql )

@@ -1,6 +1,5 @@
 require_relative( 'models/team.rb' )
 require_relative( 'models/match.rb' )
-require_relative( 'models/league.rb' )
 require( 'pry-byebug' )
 
 Match.delete_all(  )
